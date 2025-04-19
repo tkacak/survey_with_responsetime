@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Scale with Response Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .scale {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .scale-option {
+            text-align: center;
+            cursor: pointer;
+        }
+        .scale-option input {
+            margin-bottom: 5px;
+        }
+        .label-left {
+            text-align: left;
+        }
+        .label-right {
+            text-align: right;
+        }
+        .labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        #next-btn, #submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #next-btn:hover, #submit-btn:hover {
+            background-color: #45a049;
+        }
+        #results {
+            display: none;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Survey Scale</h1>
+    <p>Please answer the following questions by selecting the appropriate option on the scale.</p>
+    
+    <div id="survey-container">
+        <!-- Question 1 -->
+        <div class="question active" id="q1">
+            <h3>Question 1: I feel satisfied with my life.</h3>
+            <div class="labels">
+                <div class="label-left">Strongly Disagree</div>
+                <div class="label-right">Strongly Agree</div>
+            </div>
+            <div class="scale">
+                <div class="scale-option">
+                    <input type="radio" name="q1" value="1" id="q1-1">
+                    <label for="q1-1">1</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q1" value="2" id="q1-2">
+                    <label for="q1-2">2</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q1" value="3" id="q1-3">
+                    <label for="q1-3">3</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q1" value="4" id="q1-4">
+                    <label for="q1-4">4</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q1" value="5" id="q1-5">
+                    <label for="q1-5">5</label>
+                </div>
+            </div>
+            <button id="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+        
+        <!-- Question 2 -->
+        <div class="question" id="q2">
+            <h3>Question 2: I feel energetic most days.</h3>
+            <div class="labels">
+                <div class="label-left">Strongly Disagree</div>
+                <div class="label-right">Strongly Agree</div>
+            </div>
+            <div class="scale">
+                <div class="scale-option">
+                    <input type="radio" name="q2" value="1" id="q2-1">
+                    <label for="q2-1">1</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q2" value="2" id="q2-2">
+                    <label for="q2-2">2</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q2" value="3" id="q2-3">
+                    <label for="q2-3">3</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q2" value="4" id="q2-4">
+                    <label for="q2-4">4</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q2" value="5" id="q2-5">
+                    <label for="q2-5">5</label>
+                </div>
+            </div>
+            <button id="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+        
+        <!-- Question 3 -->
+        <div class="question" id="q3">
+            <h3>Question 3: I am able to concentrate well on tasks.</h3>
+            <div class="labels">
+                <div class="label-left">Strongly Disagree</div>
+                <div class="label-right">Strongly Agree</div>
+            </div>
+            <div class="scale">
+                <div class="scale-option">
+                    <input type="radio" name="q3" value="1" id="q3-1">
+                    <label for="q3-1">1</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q3" value="2" id="q3-2">
+                    <label for="q3-2">2</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q3" value="3" id="q3-3">
+                    <label for="q3-3">3</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q3" value="4" id="q3-4">
+                    <label for="q3-4">4</label>
+                </div>
+                <div class="scale-option">
+                    <input type="radio" name="q3" value="5" id="q3-5">
+                    <label for="q3-5">5</label>
+                </div>
+            </div>
+            <button id="submit-btn" onclick="submitSurvey()">Submit</button>
+        </div>
+    </div>
+    
+    <div id="results">
+        <h2>Survey Results</h2>
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Response</th>
+                    <th>Response Time (seconds)</th>
+                </tr>
+            </thead>
+            <tbody id="results-body">
+                <!-- Results will be populated here -->
+            </tbody>
+        </table>
+        <button onclick="exportResults()">Export Results (CSV)</button>
+    </div>
+    
+    <script>
+        const questions = ["q1", "q2", "q3"];
+        let currentQuestion = 0;
+        const results = {};
+        let startTime;
+        
+        // Initialize timestamps for each question
+        window.onload = function() {
+            startTime = new Date().getTime();
+            
+            // Add event listeners to all radio buttons
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    let questionName = this.name;
+                    let value = this.value;
+                    let endTime = new Date().getTime();
+                    let responseTime = (endTime - startTime) / 1000; // Convert to seconds
+                    
+                    results[questionName] = {
+                        response: value,
+                        responseTime: responseTime
+                    };
+                });
+            });
+        };
+        
+        function nextQuestion() {
+            // Make sure an option was selected
+            let currentQuestionId = questions[currentQuestion];
+            if (!results[currentQuestionId]) {
+                alert("Please select an option before proceeding.");
+                return;
+            }
+            
+            // Hide current question
+            document.getElementById(currentQuestionId).classList.remove("active");
+            
+            // Show next question
+            currentQuestion++;
+            let nextQuestionId = questions[currentQuestion];
+            document.getElementById(nextQuestionId).classList.add("active");
+            
+            // Reset timer for next question
+            startTime = new Date().getTime();
+        }
+        
+        function submitSurvey() {
+            // Make sure an option was selected for the last question
+            let currentQuestionId = questions[currentQuestion];
+            if (!results[currentQuestionId]) {
+                alert("Please select an option before submitting.");
+                return;
+            }
+            
+            // Hide questions and show results
+            document.getElementById("survey-container").style.display = "none";
+            document.getElementById("results").style.display = "block";
+            
+            // Display results in table
+            const tbody = document.getElementById("results-body");
+            
+            for (let i = 0; i < questions.length; i++) {
+                const q = questions[i];
+                if (results[q]) {
+                    const row = document.createElement("tr");
+                    
+                    const questionCell = document.createElement("td");
+                    questionCell.textContent = `Question ${i + 1}`;
+                    
+                    const responseCell = document.createElement("td");
+                    responseCell.textContent = results[q].response;
+                    
+                    const timeCell = document.createElement("td");
+                    timeCell.textContent = results[q].responseTime.toFixed(2);
+                    
+                    row.appendChild(questionCell);
+                    row.appendChild(responseCell);
+                    row.appendChild(timeCell);
+                    
+                    tbody.appendChild(row);
+                }
+            }
+        }
+        
+        function exportResults() {
+            let csvContent = "Question,Response,Response Time (seconds)\n";
+            
+            for (let i = 0; i < questions.length; i++) {
+                const q = questions[i];
+                if (results[q]) {
+                    csvContent += `Question ${i + 1},${results[q].response},${results[q].responseTime.toFixed(2)}\n`;
+                }
+            }
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", "survey_results.csv");
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
